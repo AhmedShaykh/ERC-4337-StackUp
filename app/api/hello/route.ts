@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import postgres from "postgres";
 
 export async function GET(request: NextRequest) {
 
-  const conn = postgres({
-    ssl: require,
-  });
+    const url = request.nextUrl;
 
-  const result = await conn.unsafe("SELECT * FROM playing_with_neon");
+    if (url.searchParams.has("name")) {
 
-  console.log("backend result", result);
+        const name = url.searchParams.get("name");
 
-  return new NextResponse(JSON.stringify(result));
+        return new NextResponse('Hello From: ' + name);
+    }
+    else {
+
+        return new NextResponse(`Please Send Your Name In Search Parameter "name"`);
+
+    }
 
 };
