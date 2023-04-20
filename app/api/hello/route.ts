@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export const GET = async (request: NextRequest) => {
 
     const url = request.nextUrl;
 
@@ -8,12 +8,11 @@ export async function GET(request: NextRequest) {
 
         const name = url.searchParams.get("name");
 
-        return new NextResponse('Hello From: ' + name);
+        return NextResponse.json({ message: "Hello From: " + name });
+
     }
     else {
-
-        return new NextResponse(`Please Send Your Name In Search Parameter "name"`);
-
+        return new NextResponse(`Please Send Your Name In Search Parameter`);
     }
 
 };
