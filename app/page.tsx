@@ -1,11 +1,10 @@
 import React from 'react';
+import Form from './Form';
 
 const page = () => {
     return (
-        <div className="flex justify-center py-4">
-            <h1 className="text-2xl font-bold">
-                FULL STACK NEXT.JS
-            </h1>
+        <div className="py-4">
+            <Form />
         </div>
     )
 };
