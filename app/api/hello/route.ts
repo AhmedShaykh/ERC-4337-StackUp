@@ -6,7 +6,7 @@ export const GET = async (request: NextRequest) => {
 
     if (url.searchParams.has("name")) {
 
-        const name = url.searchParams.get("name");
+        const name = url.searchParams.get("name"); // ? name="Enter Name"
 
         return NextResponse.json({ message: "Hello From: " + name });
 

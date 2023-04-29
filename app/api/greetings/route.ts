@@ -46,17 +46,10 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
 
-    const req = await request.json();
-
-    if (req.name) {
-        return NextResponse.json({
-            To: "Ahmed",
-            Message: "I Have Deleted the Greetings",
-            RequestType: "DELETE"
-        });
-    }
-    else {
-        return new NextResponse('Please Include Your Name in the DELETE Request');
-    }
+    return NextResponse.json({
+        To: "Ahmed",
+        Message: "I Have Deleted the Greetings",
+        RequestType: "DELETE"
+    });
 
 };
