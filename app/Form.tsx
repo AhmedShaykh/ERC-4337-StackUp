@@ -23,7 +23,7 @@ const Form = () => {
                 throw new Error("Failed to login")
             };
 
-            console.log("User Logged in!");
+            console.log("User Logged In!");
 
         }
         catch (error) {
