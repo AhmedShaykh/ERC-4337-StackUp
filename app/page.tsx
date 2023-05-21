@@ -3,7 +3,7 @@ import Todo from '@/Component/Todo';
 
 const page = () => {
     return (
-        <div className="py-4">
+        <div className="flex flex-col items-center my-4">
             <Todo />
         </div>
     )
