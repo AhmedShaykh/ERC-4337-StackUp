@@ -34,13 +34,13 @@ const Form = () => {
     return (
         <>
             <form
-                className="flex flex-col items-center space-y-6 text-black font-medium"
+                className="flex flex-col items-center space-y-6 my-20 text-black font-medium"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <div className="flex flex-col">
-                    <label className="mb-2 text-white text-md">Email:</label>
+                    <label className="mb-2 text-white text-lg">Email:</label>
                     <input type="email"
-                        className="text-sm p-2 rounded-md"
+                        className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Email"
                         {...register("email", {
                             required: true,
@@ -57,9 +57,9 @@ const Form = () => {
                 </div>
 
                 <div className="flex flex-col">
-                    <label className="mb-2 text-white text-md">Password:</label>
+                    <label className="mb-2 text-white text-lg">Password:</label>
                     <input type="password"
-                        className="text-sm p-2 rounded-md"
+                        className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Password"
                         {...register("password", {
                             required: true,
@@ -73,7 +73,7 @@ const Form = () => {
                 </div>
 
                 <div className="flex flex-col items-center">
-                    <button type="submit" className="bg-white py-2 px-4 text-md font-bold rounded-md">
+                    <button type="submit" className="bg-white py-2 px-4 text-md font-bold rounded-md mt-2">
                         Submit
                     </button>
                 </div>
