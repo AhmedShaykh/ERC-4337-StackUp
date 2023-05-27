@@ -16,6 +16,6 @@ export const todosTable = pgTable("todos", {
 
 export type Todos = InferModel<typeof todosTable>;
 
-export type NewTodos = InferModel<typeof todosTable, "insert">; // Insert Type
+export type NewTodos = InferModel<typeof todosTable, "insert">;
 
 export const db = drizzle(sql);

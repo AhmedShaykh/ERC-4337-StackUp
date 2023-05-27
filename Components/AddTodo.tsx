@@ -8,7 +8,7 @@ const AddTodo = () => {
 
     const [task, setTask] = useState<NewTodos | null>(null);
 
-    // const { refresh } = useRouter();
+    const { refresh } = useRouter();
 
     const handleSubmit = async () => {
 
@@ -21,9 +21,9 @@ const AddTodo = () => {
                     body: JSON.stringify({ task: task.task })
                 });
 
-                console.log(res.ok);
+                console.log(res);
 
-                // refresh();
+                refresh();
 
             }
 
@@ -35,7 +35,7 @@ const AddTodo = () => {
     };
 
     return (
-        <>
+        <div>
             <form className='w-full flex gap-x-3'>
                 <input
                     onChange={(e) => setTask({ task: e.target.value })}
@@ -50,7 +50,7 @@ const AddTodo = () => {
                     <Image src={"/vector.png"} width={20} height={20} alt='vector' />
                 </button>
             </form>
-        </>
+        </div>
     )
 };
 
