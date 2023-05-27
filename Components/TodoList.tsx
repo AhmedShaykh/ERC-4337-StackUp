@@ -18,9 +18,11 @@ const getData = async () => {
         };
 
         const result = await res.json();
+
         return result;
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.log(error);
 
@@ -31,20 +33,18 @@ const getData = async () => {
 const TodoList = async () => {
 
     const data: { response: Todos[] } = await getData();
-    console.log(data.response);
 
     return (
         <div className="max-h-[350px] overflow-auto mb-4">
             {
                 data.response.map((item) => {
                     return (
-                        <div key={item.id} className="bg-white p-4 my-8 my-4 flex items-center gap-x-8 shadow rounded-lg">
-                            {/* <div className="h-8 w-8 px-4 bg-primary rounded-full z-10"></div> */}
-                            <p className="text-lg font-medium text-gray-800">{item.task}</p>
+                        <div key={item.id} className="bg-gray-100 px-4 py-3 my-3 flex items-center gap-x-8 shadow rounded-lg">
+                            <div className="h-3 w-3 bg-[#030712] rounded-full"></div>
+                            <p className="text-lg font-medium">{item.task}</p>
                         </div>
                     )
-                })
-            }
+                })}
         </div>
     )
 };
