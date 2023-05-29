@@ -33,9 +33,9 @@ const Form = () => {
     };
 
     return (
-        <>
+        <div className="bg-zinc-900 text-white h-screen">
             <form
-                className="flex flex-col items-center space-y-6 my-20 text-black font-medium"
+                className="flex flex-col items-center space-y-6 py-20 text-black font-medium"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <div className="flex flex-col">
@@ -85,7 +85,7 @@ const Form = () => {
                     Go To Back
                 </h2>
             </Link>
-        </>
+        </div>
     )
 };
 

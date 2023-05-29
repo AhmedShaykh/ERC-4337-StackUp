@@ -44,7 +44,7 @@ const AddTodo = () => {
                     type="text"
                     className="text-[1rem] font-medium rounded-full w-full py-3 px-5 border focus:outline-blue-900"
                 />
-                
+
                 <button
                     onClick={handleSubmit}
                     className="p-4 shrink-0 rounded-full bg-gradient-to-b from-gray-900 to-blue-900"
