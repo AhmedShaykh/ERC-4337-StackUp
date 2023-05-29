@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { NewTodos } from "@/lib/drizzle";
 import { useRouter } from "next/navigation";
@@ -18,36 +18,43 @@ const AddTodo = () => {
 
                 const res = await fetch("/api/todos", {
                     method: "POST",
-                    body: JSON.stringify({ task: task.task })
+                    body: JSON.stringify({
+                        TASK: task.task
+                    })
                 });
-
-                console.log(res);
 
                 refresh();
 
             }
 
-        } catch (error) {
+        }
+        catch (error) {
 
             console.log("error");
 
         }
+
     };
 
     return (
         <div>
             <form className='w-full flex gap-x-3'>
                 <input
-                    onChange={(e) => setTask({ task: e.target.value })}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setTask({ task: e.target.value })}
                     type="text"
                     className="text-[1rem] font-medium rounded-full w-full py-3 px-5 border focus:outline-blue-900"
                 />
+                
                 <button
                     onClick={handleSubmit}
-                    // type="submit"
                     className="p-4 shrink-0 rounded-full bg-gradient-to-b from-gray-900 to-blue-900"
                 >
-                    <Image src={"/vector.png"} width={20} height={20} alt='vector' />
+                    <Image
+                        src={"/vector.png"}
+                        width={20}
+                        height={20}
+                        alt='vector'
+                    />
                 </button>
             </form>
         </div>

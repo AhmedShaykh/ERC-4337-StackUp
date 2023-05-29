@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
         if (reqData.Name && reqData.Owner) {
 
-            const res = await client.sql`INSERT INTO Pets (Name, Owner) VALUES(${reqData.Name}, ${reqData.Owner})`;
+            await client.sql`INSERT INTO Pets (Name, Owner) VALUES(${reqData.Name}, ${reqData.Owner})`;
 
             return NextResponse.json({ message: "Data Added SuccessFully" });
 
