@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Full Stack Next.JS!',
-  description: 'Learning Full Stack Next.JS',
+  title: 'Next.JS With BackEnd!',
+  description: 'Learning Next.JS With BackEnd',
 };
 
 export default function RootLayout({

@@ -8,11 +8,13 @@ export const GET = async (request: NextRequest) => {
 
         const name = url.searchParams.get("name"); // ? name="Enter Name"
 
-        return NextResponse.json({ message: "Hello From: " + name });
+        return NextResponse.json({ message: "Hello From: " + name?.toUpperCase() });
 
     }
     else {
+
         return new NextResponse(`Please Send Your Name In Search Parameter`);
+
     }
 
 };

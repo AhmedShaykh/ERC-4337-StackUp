@@ -7,9 +7,11 @@ interface Params {
 };
 
 export async function GET(request: NextRequest, { params }: Params) {
+
     return NextResponse.json({
-        From: params.name,
+        From: params.name.toUpperCase(),
         Message: "Greetings from Pakistan",
         RequestType: "GET"
     });
+
 };

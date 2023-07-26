@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: "Data Added SuccessFully" });
 
         }
+
         else {
 
             throw new Error("Pets Field is Required!");
