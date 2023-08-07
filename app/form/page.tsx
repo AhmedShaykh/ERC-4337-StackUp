@@ -11,7 +11,6 @@ const Form = () => {
     } = useForm();
 
     const onSubmit = async (data: any) => {
-        console.log(data);
 
         try {
 
@@ -28,7 +27,9 @@ const Form = () => {
 
         }
         catch (error) {
+
             console.error("Error: " + error);
+
         }
     };
 
@@ -39,7 +40,10 @@ const Form = () => {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <div className="flex flex-col">
-                    <label className="mb-2 text-white text-lg">Email:</label>
+                    <label className="mb-2 text-white text-lg">
+                        Email:
+                    </label>
+
                     <input type="email"
                         className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Email"
@@ -52,13 +56,17 @@ const Form = () => {
                     {errors.email && errors.email.type === "required" && (
                         <p className="text-red-500 text-sm py-2">Email Is Required!</p>
                     )}
+
                     {errors.email && errors.email.type === "pattern" && (
                         <p className="text-red-500 text-sm py-2">RegEx Is Required!</p>
                     )}
                 </div>
 
                 <div className="flex flex-col">
-                    <label className="mb-2 text-white text-lg">Password:</label>
+                    <label className="mb-2 text-white text-lg">
+                        Password:
+                    </label>
+
                     <input type="password"
                         className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Password"
