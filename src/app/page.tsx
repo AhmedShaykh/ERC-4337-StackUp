@@ -1,5 +1,5 @@
-import TodoList from '@/Components/TodoList';
-import AddTodo from '@/Components/AddTodo';
+import AddTodo from "../Components/AddTodo";
+import TodoList from "../Components/TodoList";
 
 const page = () => {
     return (
