@@ -1,4 +1,5 @@
 import {
+    boolean,
     pgTable,
     serial,
     varchar
@@ -11,7 +12,8 @@ export const todosTable = pgTable("todos", {
     id: serial("id").primaryKey(),
     task: varchar("task", {
         length: 255
-    }).notNull()
+    }).notNull(),
+    isdone: boolean("isdone")
 });
 
 export type Todos = InferModel<typeof todosTable>;
