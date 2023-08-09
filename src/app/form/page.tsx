@@ -14,7 +14,7 @@ const Form = () => {
 
         try {
 
-            const res = await fetch("/api/form-submission", {
+            const res = await fetch("/api/form", {
                 method: "POST",
                 body: JSON.stringify(data)
             });

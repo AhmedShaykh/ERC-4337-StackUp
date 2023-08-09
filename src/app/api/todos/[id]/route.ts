@@ -8,7 +8,7 @@ export const PUT = async (request: NextRequest, {
 
     const id = params.id;
 
-    return NextResponse.json({ message: "PUT request successful" });
+    return NextResponse.json({ message: "PUT request successful " + id });
 
 };
 
@@ -20,6 +20,6 @@ export const DELETE = async (request: NextRequest, {
 
     const id = params.id;
 
-    return NextResponse.json({ message: "DELETE request successful" });
+    return NextResponse.json({ message: "DELETE request successful " + id });
 
 };
