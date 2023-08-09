@@ -29,6 +29,10 @@ export const DELETE = async (request: NextRequest, {
 
     const id = params.id;
 
-    return NextResponse.json({ message: "DELETE request successful " + id });
+    await db.delete(todosTable)
+        .where(eq(todosTable.id, id))
+        .returning({ id: todosTable.id });
+
+    return NextResponse.json({ message: "Data Deleted" });
 
 };
