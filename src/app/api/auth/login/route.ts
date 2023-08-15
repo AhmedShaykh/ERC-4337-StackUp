@@ -1,37 +1,35 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import * as jose from 'jose';
-// import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import * as jose from 'jose';
 
-// export const POST = async (requset: NextRequest) => {
+export const POST = async (requset: NextRequest) => {
 
-//     const body = await requset.json().catch(() => null);
+    const body = await requset.json().catch(() => null);
 
-//     if (body.email === "admin" && body.password === "admin") {
+    if (body.email === "admin" && body.password === "admin") {
 
-//         const secret = new TextEncoder().encode(
-//             'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
-//         );
+        const secret = new TextEncoder().encode(
+            process.env.JWT_SECRET
+        );
 
-//         const alg = 'HS256';
+        console.log("secret: ", secret);
 
-//         const jwt = await new jose.SignJWT({ email: body.email })
-//             .setProtectedHeader({ alg })
-//             .setIssuedAt()
-//             .setIssuer('urn:example:issuer')
-//             .setAudience('urn:example:audience')
-//             .setExpirationTime('2h')
-//             .sign(secret);
+        const alg = "HS256";
 
-//         console.log(jwt);
+        const jwt = await new jose.SignJWT({ email: body.email })
+            .setProtectedHeader({ alg })
+            .setIssuedAt()
+            .setExpirationTime("2h")
+            .sign(secret);
 
-//         cookies().set("token", jwt, {
-//             httpOnly: true
-//         });
+        cookies().set("token", jwt, {
+            httpOnly: true,
+        });
 
-//         return NextResponse.json({ message: "Login Success" });
+        return NextResponse.json({ message: "Login Success" });
 
-//     }
+    }
 
-//     return NextResponse.json({ message: body });
+    return NextResponse.json({ message: body });
 
-// };
+};
