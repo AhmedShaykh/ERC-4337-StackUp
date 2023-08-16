@@ -1,41 +1,50 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import * as jose from "jose";
+import { NextRequest, NextResponse } from "next/server";
+import { jwtVerify } from "jose";
 
 export async function middleware(request: NextRequest) {
+
+    const { pathname } = request.nextUrl;
 
     let jwt = request.cookies.get("token")?.value;
 
     console.log("token: ", jwt);
 
-    const secret = new TextEncoder().encode(
-        process.env.JWT_SECRET
-    );
+    try {
 
-    const url = request.nextUrl.clone();
+        if (pathname === "/login" || pathname === "/register") {
 
-    url.pathname = "/";
+            if (jwt) return NextResponse.redirect(`/`);
 
-    // if (!jwt) {
+            return NextResponse.next();
+        }
+        if (!jwt) {
 
-    //     return NextResponse.redirect(url);
+            return NextResponse.redirect(`/form`);
+        }
+        const verifyToken = await jwtVerify(jwt,
+            new TextEncoder().encode(process.env.JWT_SECRET)
+        );
 
-    // } else {
+        console.log("Verify Auth", verifyToken);
 
-    //     const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret);
+        if (verifyToken) {
 
-    //     const headers = new Headers(request.headers);
+            return NextResponse.next();
 
-    //     headers.set("user", JSON.stringify(payload.email));
+        }
 
-    //     console.log(protectedHeader);
+        return NextResponse.json(
+            { error: { message: "Authentication Required" } },
+            { status: 401 }
+        );
 
-    //     console.log(payload);
+    } catch (error) {
 
-    //     return NextResponse.next({
-    //         request: {
-    //             headers: headers
-    //         }
-    //     });
-    // }
+        console.log(error);
+
+    }
+};
+
+export const config = {
+    matcher: ["/", "/form"],
 };

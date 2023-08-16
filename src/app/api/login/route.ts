@@ -26,12 +26,12 @@ export const POST = async (requset: NextRequest) => {
             httpOnly: true,
         });
 
-        return NextResponse.json({ message: "Login Success" });
+        return NextResponse.json({ message: "Login Successfully!" });
 
     }
 
     return NextResponse.json(
-        { message: "Something Went Wrong" },
+        { message: "Invalid Email or Password" },
         { status: 400 }
     );
 
