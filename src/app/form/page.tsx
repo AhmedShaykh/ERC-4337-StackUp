@@ -14,7 +14,7 @@ const Form = () => {
 
         try {
 
-            const res = await fetch("/api/form", {
+            const res = await fetch("/api/login", {
                 method: "POST",
                 body: JSON.stringify(data)
             });
@@ -44,12 +44,11 @@ const Form = () => {
                         Email:
                     </label>
 
-                    <input type="email"
+                    <input type="text"
                         className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Email"
-                        {...register("email", {
-                            required: true,
-                            pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+                        {...register("text", {
+                            required: true
                         })}
                     />
 
@@ -57,9 +56,6 @@ const Form = () => {
                         <p className="text-red-500 text-sm py-2">Email Is Required!</p>
                     )}
 
-                    {errors.email && errors.email.type === "pattern" && (
-                        <p className="text-red-500 text-sm py-2">RegEx Is Required!</p>
-                    )}
                 </div>
 
                 <div className="flex flex-col">
