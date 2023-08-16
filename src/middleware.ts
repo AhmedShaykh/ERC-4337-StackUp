@@ -1,40 +1,41 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import * as jose from "jose";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import * as jose from "jose";
 
-// export async function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 
-//     let jwt = request.cookies.get("token")?.value;
+    let jwt = request.cookies.get("token")?.value;
 
-//     console.log("token: ", jwt);
+    console.log("token: ", jwt);
 
-//     const secret = new TextEncoder().encode(
-//         'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2'
-//     );
+    const secret = new TextEncoder().encode(
+        process.env.JWT_SECRET
+    );
 
-//     if (!jwt) {
+    const url = request.nextUrl.clone();
 
-//         // return NextResponse.redirect("/");
+    url.pathname = "/";
 
-//     } else {
+    // if (!jwt) {
 
-//         const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret);
+    //     return NextResponse.redirect(url);
 
-//         const headers = new Headers(request.headers);
+    // } else {
 
-//         headers.set("user", JSON.stringify(payload.email));
+    //     const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret);
 
-//         console.log(protectedHeader);
+    //     const headers = new Headers(request.headers);
 
-//         console.log(payload);
+    //     headers.set("user", JSON.stringify(payload.email));
 
-//         return NextResponse.next({
-//             request: {
-//                 headers: headers
-//             }
-//         });
-//     }
-// };
+    //     console.log(protectedHeader);
 
-// export const config = {
-//   matcher: ["/api*"],
-// };
+    //     console.log(payload);
+
+    //     return NextResponse.next({
+    //         request: {
+    //             headers: headers
+    //         }
+    //     });
+    // }
+};

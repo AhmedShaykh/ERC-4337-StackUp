@@ -30,6 +30,9 @@ export const POST = async (requset: NextRequest) => {
 
     }
 
-    return NextResponse.json({ message: body });
+    return NextResponse.json(
+        { message: "Something Went Wrong" },
+        { status: 400 }
+    );
 
 };
