@@ -6,7 +6,7 @@ export const POST = async (requset: NextRequest) => {
 
     const body = await requset.json();
 
-    if (body.email === "admin" && body.password === "admin") {
+    if (body.username === "admin" && body.password === "admin") {
 
         const secret = new TextEncoder().encode(
             process.env.JWT_SECRET
@@ -17,7 +17,7 @@ export const POST = async (requset: NextRequest) => {
         const alg = "HS256";
 
         const jwt = await new jose.SignJWT({
-            email: body.email,
+            username: body.username,
             role: "admin"
         })
             .setProtectedHeader({ alg })
@@ -37,7 +37,7 @@ export const POST = async (requset: NextRequest) => {
     }
 
     return NextResponse.json(
-        { message: "Invalid Email or Password" },
+        { message: "Invalid Username or Password" },
         { status: 400 }
     );
 

@@ -1,61 +1,59 @@
 "use client";
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const router = useRouter();
 
-    const onSubmit = async (data: any) => {
+    const handleSubmit = async (event: any) => {
 
-        try {
+        event.preventDefault();
 
-            const res = await fetch("/api/login", {
-                method: "POST",
-                body: JSON.stringify(data)
-            });
+        const formData = new FormData(event.target);
 
-            if (!res.ok) {
-                throw new Error("Failed to login")
-            };
+        const username = formData.get("username");
 
-            console.log("User Logged In!");
+        const password = formData.get("password");
+
+        const res = await fetch("/api/login", {
+            method: "POST",
+            body: JSON.stringify({ username, password })
+        });
+
+        const { accessToken } = await res.json();
+
+        console.log(accessToken);
+
+        if (accessToken) {
+
+            router.push("/");
+
+        } else {
+
+            alert("Login Failed");
 
         }
-        catch (error) {
 
-            console.error("Error: " + error);
-
-        }
     };
 
     return (
         <div className="bg-zinc-900 text-white h-screen">
             <form
                 className="flex flex-col items-center space-y-6 py-20 text-black font-medium"
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit}
             >
                 <div className="flex flex-col">
                     <label className="mb-2 text-white text-lg">
                         Email:
                     </label>
 
-                    <input type="text"
+                    <input
+                        type="text"
+                        name="username"
                         className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Email"
-                        {...register("text", {
-                            required: true
-                        })}
                     />
-
-                    {errors.email && errors.email.type === "required" && (
-                        <p className="text-red-500 text-sm py-2">Email Is Required!</p>
-                    )}
-
                 </div>
 
                 <div className="flex flex-col">
@@ -63,18 +61,12 @@ const Form = () => {
                         Password:
                     </label>
 
-                    <input type="password"
+                    <input
+                        type="password"
+                        name="password"
                         className="text-sm p-2 rounded-md w-80"
                         placeholder="Enter Your Password"
-                        {...register("password", {
-                            required: true,
-                            minLength: 6,
-                        })}
                     />
-
-                    {errors.password && errors.password.type === "required" && (
-                        <p className="text-red-500 text-sm py-2">Password Is Required!</p>
-                    )}
                 </div>
 
                 <div className="flex flex-col items-center">
