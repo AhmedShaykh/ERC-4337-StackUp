@@ -75,12 +75,6 @@ const Form = () => {
                     </button>
                 </div>
             </form>
-
-            <Link href="/">
-                <h2 className="text-center my-4 text-[22px] text-blue-700 hover:text-white">
-                    Go To Back
-                </h2>
-            </Link>
         </div>
     )
 };
