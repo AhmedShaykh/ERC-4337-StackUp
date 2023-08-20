@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 
 export async function middleware(request: NextRequest) {
 
-    const { pathname } = request.nextUrl;
+    const { pathname, origin } = request.nextUrl;
 
     let jwt = request.cookies.get("token")?.value;
 
@@ -11,16 +11,17 @@ export async function middleware(request: NextRequest) {
 
     try {
 
-        if (pathname === "/login" || pathname === "/register") {
+        if (pathname === "/form") {
 
-            if (jwt) return NextResponse.redirect(`/`);
+            if (jwt) return NextResponse.redirect(`${origin}`);
 
             return NextResponse.next();
         }
-        if (!jwt) {
 
-            return NextResponse.redirect(`/form`);
+        if (!jwt) {
+            return NextResponse.redirect("http://localhost:3000/form");
         }
+
         const verifyToken = await jwtVerify(jwt,
             new TextEncoder().encode(process.env.JWT_SECRET)
         );
@@ -28,9 +29,7 @@ export async function middleware(request: NextRequest) {
         console.log("Verify Auth", verifyToken);
 
         if (verifyToken) {
-
             return NextResponse.next();
-
         }
 
         return NextResponse.json(
@@ -43,8 +42,4 @@ export async function middleware(request: NextRequest) {
         console.log(error);
 
     }
-};
-
-export const config = {
-    matcher: ["/", "/form"],
 };
