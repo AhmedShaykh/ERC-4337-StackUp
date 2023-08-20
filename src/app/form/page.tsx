@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Form = () => {
 
@@ -16,6 +16,16 @@ const Form = () => {
 
         const password = formData.get("password");
 
+        if (username === "") {
+
+            toast.error("Username Is Required!");
+
+        } else if (password === "") {
+
+            toast.error("Password Is Required!");
+
+        }
+
         const res = await fetch("/api/login", {
             method: "POST",
             body: JSON.stringify({ username, password })
@@ -23,15 +33,15 @@ const Form = () => {
 
         const { accessToken } = await res.json();
 
-        console.log(accessToken);
-
         if (accessToken) {
 
             router.push("/");
 
-        } else {
+            toast.success("Login Successfully!");
 
-            alert("Login Failed");
+        } else if (username && password && !accessToken) {
+
+            toast.error("Login Failed");
 
         }
 
