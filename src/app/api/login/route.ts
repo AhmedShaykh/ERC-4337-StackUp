@@ -4,7 +4,7 @@ import * as jose from 'jose';
 
 export const POST = async (requset: NextRequest) => {
 
-    const body = await requset.json().catch(() => null);
+    const body = await requset.json();
 
     if (body.email === "admin" && body.password === "admin") {
 
@@ -16,7 +16,10 @@ export const POST = async (requset: NextRequest) => {
 
         const alg = "HS256";
 
-        const jwt = await new jose.SignJWT({ email: body.email })
+        const jwt = await new jose.SignJWT({
+            email: body.email,
+            role: "admin"
+        })
             .setProtectedHeader({ alg })
             .setIssuedAt()
             .setExpirationTime("2h")
@@ -26,7 +29,10 @@ export const POST = async (requset: NextRequest) => {
             httpOnly: true,
         });
 
-        return NextResponse.json({ message: "Login Successfully!" });
+        return NextResponse.json({
+            accessToken: jwt,
+            message: "Login Successfully!"
+        });
 
     }
 
