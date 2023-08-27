@@ -1,64 +1,60 @@
-// "use client";
-// import React, { ChangeEvent, useState } from "react";
-// import Image from "next/image";
-// import { NewTodos } from "@/lib/drizzle";
-// import { useRouter } from "next/navigation";
+"use client";
+import React, { ChangeEvent, useState } from "react";
+import { NewTodos } from "../lib/drizzle";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-// const AddTodo = () => {
+const AddTodo = () => {
 
-//     const [task, setTask] = useState<NewTodos | null>(null);
+    const [task, setTask] = useState<NewTodos | any>("");
 
-//     const { refresh } = useRouter();
+    const { refresh } = useRouter();
 
-//     const handleSubmit = async () => {
+    const handleSubmit = async () => {
 
-//         try {
+        try {
 
-//             if (task) {
+            if (task) {
 
-//                 const res = await fetch("/api/todos", {
-//                     method: "POST",
-//                     body: JSON.stringify({
-//                         TASK: task.task
-//                     })
-//                 });
+                await fetch("/api/todos", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        task: task.task
+                    })
+                });
 
-//                 refresh();
+                refresh();
 
-//             }
+            }
 
-//         }
-//         catch (error) {
+        }
+        catch (error) {
+            console.log("error");
+        }
 
-//             console.log("error");
+    };
 
-//         }
+    return (
+        <form className='w-full flex gap-x-3'>
+            <input
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setTask({ task: e.target.value })}
+                className="text-[1rem] font-medium rounded-full w-full py-3 px-5 border focus:outline-blue-900"
+                type="text"
+            />
 
-//     };
+            <button
+                className="p-4 shrink-0 rounded-full bg-gradient-to-b from-gray-900 to-blue-900"
+                onClick={handleSubmit}
+            >
+                <Image
+                    src={"/vector.png"}
+                    width={20}
+                    height={20}
+                    alt='vector'
+                />
+            </button>
+        </form>
+    )
+};
 
-//     return (
-//         <div>
-//             <form className='w-full flex gap-x-3'>
-//                 <input
-//                     onChange={(e: ChangeEvent<HTMLInputElement>) => setTask({ task: e.target.value })}
-//                     type="text"
-//                     className="text-[1rem] font-medium rounded-full w-full py-3 px-5 border focus:outline-blue-900"
-//                 />
-
-//                 <button
-//                     onClick={handleSubmit}
-//                     className="p-4 shrink-0 rounded-full bg-gradient-to-b from-gray-900 to-blue-900"
-//                 >
-//                     <Image
-//                         src={"/vector.png"}
-//                         width={20}
-//                         height={20}
-//                         alt='vector'
-//                     />
-//                 </button>
-//             </form>
-//         </div>
-//     )
-// };
-
-// export default AddTodo;
+export default AddTodo;
