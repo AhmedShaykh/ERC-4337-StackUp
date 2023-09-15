@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from "react";
 import { NewTodos } from "../lib/drizzle";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 const AddTodo = () => {
 
@@ -23,8 +24,9 @@ const AddTodo = () => {
                     })
                 });
 
-                refresh();
+                toast.success("Todo Successfully Added!");
 
+                refresh();
             }
 
         }

@@ -1,10 +1,13 @@
 import React from 'react';
+import Todo from './Todo';
 
 const getData = async () => {
 
     try {
 
-        const res = await fetch("http://127.0.0.1:3000/api/todos", {
+        const url = "http://127.0.0.1:3000" || "http://localhost:3000/" || "https://localhost:3000/";
+
+        const res = await fetch(`${url}/api/todos`, {
             method: "GET",
             cache: "no-store",
             headers: {
@@ -19,6 +22,7 @@ const getData = async () => {
         const result = await res.json();
 
         return result;
+
     }
     catch (error) {
 
@@ -43,15 +47,11 @@ const TodoList = async () => {
     }
 
     return (
-        <div className="max-h-[350px] overflow-y-auto mb-4 px-2
-        scrollbar-thumb-blue-900 scrollbar-track-transparent scrollbar-thin scrollbar-thumb-rounded">
+        <div
+            className="max-h-[350px] overflow-y-auto mb-4 px-2scrollbar-thumb-blue-900 scrollbar-track-transparent scrollbar-thin scrollbar-thumb-rounded"
+        >
             {getdata.data?.map((item: any) => (
-                <div key={item.id} className="bg-gray-100 px-4 py-3 my-3 flex items-center gap-x-8 shadow rounded-lg">
-                    <div className="h-3 w-3 bg-[#030712] rounded-full" />
-                    <p className="text-lg font-medium">
-                        {item.task}
-                    </p>
-                </div>
+                <Todo todo={item} />
             ))}
         </div>
     )
